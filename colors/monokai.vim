@@ -1,0 +1,1 @@
+/home/user/.vim/bundle/vim-monokai/colors/Monokai.vim
