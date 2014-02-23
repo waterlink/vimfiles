@@ -1,0 +1,98 @@
+source ~/.vim/vimrc
+
+nnoremap <C-F> :CommandT<cr>
+nnoremap <f4> :BufExplorer<cr>
+colorscheme monokai
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set colorcolumn=100
+
+set wildignore+=tmp/cache/assets/*
+
+" noremap <Up> <nop>
+" noremap <Down> <nop>
+" noremap <Left> <nop>
+" noremap <Right> <nop>
+
+cabbrev gst Gstatus
+cabbrev gd Gdiff
+
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=Red guibg=NONE
+
+" folding
+set foldmethod=expr
+set foldexpr=TestFolding(v:lnum)
+set foldcolumn=1
+set foldlevel=1
+set foldnestmax=1
+
+function! IndentLevel(lnum)
+  let level = indent(a:lnum) / &shiftwidth
+  if level > 2
+    return 2
+  endif
+  return level
+endfunction
+
+function! PrevNonBlankLine(lnum)
+  let current = a:lnum - 1
+
+  while current > 0
+    if getline(current) =~? '\v\S'
+      return current
+    endif
+
+    let current -= 1
+  endwhile
+
+  return -2
+endfunction
+
+function! NextNonBlankLine(lnum)
+  let numlines = line('$')
+  let current = a:lnum + 1
+
+  while current <= numlines
+    if getline(current) =~? '\v\S'
+      return current
+    endif
+
+    let current += 1
+  endwhile
+
+  return -2
+endfunction
+
+function! TestFolding(lnum)
+
+  let prev_indent = IndentLevel(PrevNonBlankLine(a:lnum))
+  let this_indent = IndentLevel(a:lnum)
+  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+
+  if getline(a:lnum) =~? '\v^\s*$'
+    return TestFolding(PrevNonBlankLine(a:lnum))
+  endif
+
+  if prev_indent > this_indent
+    return prev_indent
+  elseif next_indent == this_indent
+    return this_indent
+  elseif next_indent < this_indent
+    return this_indent
+  elseif next_indent > this_indent
+    return '>' . next_indent
+  endif
+endfunction
+
+
+" running test file, one test, or all suite
+noremap <F7> :!testdrb %<CR>
+noremap <F9> ?test ['"][^'"]\+['"] do<CR>:.w !sed "s/^\ \+//" \| sed "s/\ do$//" \| sed "s/['\"]//g" \| sed "s/\ /_/g" \| bin/one_test %<CR>
+noremap <F5> :!testdrb test/**/*_test.rb
+
