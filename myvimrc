@@ -92,7 +92,9 @@ endfunction
 
 
 " running test file, one test, or all suite
-noremap <F7> :!testdrb %<CR>
-noremap <F9> ?test ['"][^'"]\+['"] do<CR>:.w !sed "s/^\ \+//" \| sed "s/\ do$//" \| sed "s/['\"]//g" \| sed "s/\ /_/g" \| bin/one_test %<CR>
-noremap <F5> :!testdrb test/**/*_test.rb
+noremap <F7> :!time testdrb %<CR>
+noremap <F9> $?test ['"][^'"]\+['"] do<CR>:.w !sed "s/^\ \+//" \| sed "s/\ do$//" \| sed "s/['\"]//g" \| sed "s/\ /_/g" \| time bin/one_test %<CR>
+noremap <F5> :!time testdrb test/**/*_test.rb<CR>
+noremap <F12> :A<CR>
+noremap <S-F12> :R<CR>
 
