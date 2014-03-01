@@ -8,6 +8,11 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+set nobackup
+set noswapfile
+" better atomic save
+autocmd BufWriteCmd * call AtomicSave() 
+
 set colorcolumn=100
 
 set wildignore+=tmp/cache/assets/*
@@ -16,6 +21,8 @@ set wildignore+=tmp/cache/assets/*
 " noremap <Down> <nop>
 " noremap <Left> <nop>
 " noremap <Right> <nop>
+
+nnoremap ; :
 
 cabbrev gst Gstatus
 cabbrev gd Gdiff
@@ -90,6 +97,13 @@ function! TestFolding(lnum)
   endif
 endfunction
 
+function RunTest(text)
+  let name = substitute(a:text, "['\"]", "", "g")
+  let name = substitute(name, "[^a-zA-Z0-9]", "_", "g")
+  let cmd = substitute("echo {name} | time bin/one_test {file}\n", "{name}", name, "")
+  let cmd = substitute(cmd, "{file}", @%, "")
+  call Send_to_Tmux(cmd)
+endfunction
 
 " running test file, one test, or all suite
 noremap <F7> :!time testdrb %<CR>
@@ -97,4 +111,13 @@ noremap <F9> $?test ['"][^'"]\+['"] do<CR>:.w !sed "s/^\ \+//" \| sed "s/\ do$//
 noremap <F5> :!time testdrb test/**/*_test.rb<CR>
 noremap <F12> :A<CR>
 noremap <S-F12> :R<CR>
+
+noremap <F5> :call Send_to_Tmux("time bin/tests\n")<CR>
+noremap <F7> :call Send_to_Tmux(substitute("time testdrb {file}\n", "{file}", @%, ""))<CR>
+noremap <F9> $?test ['"][^'"]\+['"] do<CR>^v/' do<CR>"ry :call RunTest(@r)<CR>
+
+
+" faster search
+set grepprg=ack-grep
+
 

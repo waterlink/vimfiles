@@ -106,3 +106,9 @@
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
 	url = https://github.com/tpope/vim-bundler.git
+[submodule "bundle/vim-tmux-navigator"]
+	path = bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "bundle/Atomic-Save"]
+	path = bundle/Atomic-Save
+	url = https://github.com/waterlink/Atomic-Save.git
