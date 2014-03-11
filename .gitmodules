@@ -112,3 +112,6 @@
 [submodule "bundle/Atomic-Save"]
 	path = bundle/Atomic-Save
 	url = https://github.com/waterlink/Atomic-Save.git
+[submodule "bundle/vim-autocomplete"]
+	path = bundle/vim-autocomplete
+	url = https://github.com/Valloric/YouCompleteMe.git
