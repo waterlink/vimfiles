@@ -111,6 +111,7 @@ noremap <F9> $?test ['"][^'"]\+['"] do<CR>:.w !sed "s/^\ \+//" \| sed "s/\ do$//
 noremap <F5> :!time testdrb test/**/*_test.rb<CR>
 noremap <F12> :A<CR>
 noremap <S-F12> :R<CR>
+noremap <F11> :R<CR>
 
 noremap <F5> :call Send_to_Tmux("time bin/tests\n")<CR>
 noremap <F7> :call Send_to_Tmux(substitute("time testdrb {file}\n", "{file}", @%, ""))<CR>
@@ -120,4 +121,8 @@ noremap <F9> $?test ['"][^'"]\+['"] do<CR>^v/' do<CR>"ry :call RunTest(@r)<CR>
 " faster search
 set grepprg=ack-grep
 
+
+" switchers to change how word-wise ops working
+noremap _ :set iskeyword-=_ <CR>
+noremap + :set iskeyword+=_ <CR>
 
