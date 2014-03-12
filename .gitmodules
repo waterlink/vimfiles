@@ -115,3 +115,6 @@
 [submodule "bundle/vim-autocomplete"]
 	path = bundle/vim-autocomplete
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/browser.vim"]
+	path = bundle/browser.vim
+	url = https://github.com/vim-scripts/browser.vim.git
