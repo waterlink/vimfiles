@@ -1,0 +1,10 @@
+splitw -h -p 30
+selectp -t 0
+splitw -v -p 25
+neww
+splitw -h -p 30
+selectp -t 0
+splitw -v -p 20
+selectp -t 2
+splitw -v -p 40
+

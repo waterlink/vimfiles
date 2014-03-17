@@ -126,3 +126,6 @@ set grepprg=ack-grep
 noremap _ :set iskeyword-=_ <CR>
 noremap + :set iskeyword+=_ <CR>
 
+" highlight line under cursor
+set cursorline
+
