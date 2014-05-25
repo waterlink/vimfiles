@@ -121,3 +121,6 @@
 [submodule "bundle/synmark.vim"]
 	path = bundle/synmark.vim
 	url = https://github.com/vim-scripts/synmark.vim.git
+[submodule "bundle/vim-instant-markdown"]
+	path = bundle/vim-instant-markdown
+	url = https://github.com/suan/vim-instant-markdown.git

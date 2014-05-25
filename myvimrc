@@ -15,6 +15,9 @@ autocmd BufWriteCmd * call AtomicSave()
 
 set colorcolumn=100
 
+" highlight line and column under cursor
+set cursorline cursorcolumn
+
 set wildignore+=tmp/cache/assets/*
 
 " noremap <Up> <nop>
@@ -125,7 +128,4 @@ set grepprg=ack-grep
 " switchers to change how word-wise ops working
 noremap _ :set iskeyword-=_ <CR>
 noremap + :set iskeyword+=_ <CR>
-
-" highlight line under cursor
-set cursorline
 
